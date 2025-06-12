@@ -16,12 +16,22 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo "Installing Python dependencies..."
+                echo "Creating virtual environment and installing from requirements.txt..."
                 sh '''
                 python3 -m venv venv
                 source venv/bin/activate
                 pip install --upgrade pip
-                pip install flask
+                pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                echo "Running pytest..."
+                sh '''
+                source venv/bin/activate
+                pytest tests/
                 '''
             }
         }
