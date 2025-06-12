@@ -31,7 +31,7 @@ pipeline {
                 echo "Running pytest..."
                 sh '''
                 source venv/bin/activate
-                pytest tests/test_app.py
+                python -m pytest tests/
                 '''
             }
         }
